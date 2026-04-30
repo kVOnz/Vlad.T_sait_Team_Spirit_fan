@@ -1,0 +1,414 @@
+/*=== ЦВЕТОВАЯ ГАММА И ПЕРЕМЕННЫЕ ===*/
+:root {
+    --bg-dark: #0c0c0e;
+    --bg-card: #15161a;
+    --bg-elevated: #1e1f24;
+    --bg-accent: #2a2c35;
+    --text-primary: #f0f0f0;
+    --text-secondary: #9a9aa8;
+    --text-muted: #6a6a75;
+    --accent-steel: #7a8b9b;
+    --accent-light: #9aabb8;
+    --accent-orange: #c97e3a;
+    --border-color: #2c2e36;
+    --danger: #aa4444;
+    --success: #5a8a7a;
+    --border-radius-sm: 8px;
+    --border-radius-md: 14px;
+    --border-radius-lg: 20px;
+    --transition: 0.2s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+    line-height: 1.5;
+}
+
+/*=== HEADER ===*/
+header {
+    background-color: var(--bg-card);
+    border-bottom: 1px solid var(--border-color);
+    padding: 1rem 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(4px);
+}
+
+.header-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 50px;
+}
+
+.logo {
+    z-index: 101;
+}
+
+.logo img {
+    height: 55px;
+    width: auto;
+    display: block;
+    transition: transform var(--transition), opacity var(--transition);
+}
+
+.logo img:hover {
+    transform: scale(1.02);
+    opacity: 0.95;
+}
+
+nav ul {
+    display: flex;
+    gap: 28px;
+    list-style: none;
+}
+
+nav a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: color var(--transition);
+    padding: 6px 0;
+    border-bottom: 2px solid transparent;
+}
+
+nav a:hover {
+    color: var(--accent-steel);
+    border-bottom-color: var(--accent-steel);
+}
+
+/*=== MAIN ===*/
+main {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 2rem 2rem 3rem;
+}
+
+section {
+    margin-bottom: 3.5rem;
+}
+
+/* Заголовки с псевдоэлементом */
+h2 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    position: relative;
+    display: inline-block;
+    letter-spacing: -0.5px;
+    color: var(--text-primary);
+}
+
+h2::before {
+    content: "◆";
+    position: absolute;
+    left: -28px;
+    top: 2px;
+    color: var(--accent-steel);
+    font-size: 1.4rem;
+}
+
+h3 {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+/*=== GRID ДЛЯ ОСНОВНОГО СОСТАВА ===*/
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.player-card {
+    background: var(--bg-card);
+    border-radius: var(--border-radius-md);
+    padding: 1.3rem 0.8rem 1rem;
+    text-align: center;
+    border: 1px solid var(--border-color);
+    transition: transform var(--transition), border-color var(--transition), background var(--transition);
+    position: relative;
+}
+
+.player-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent-steel);
+    background: var(--bg-elevated);
+}
+
+.player-card img {
+    width: 100%;
+    max-width: 120px;
+    height: auto;
+    max-height: 120px;
+    object-fit: contain;
+    border-radius: 12px;
+}
+
+/* Псевдоэлемент ::after для роли игрока */
+.player-card::after {
+    content: attr(data-role);
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--accent-steel);
+    color: var(--bg-dark);
+    font-size: 0.7rem;
+    font-weight: bold;
+    padding: 2px 12px;
+    border-radius: 20px;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity var(--transition);
+    pointer-events: none;
+}
+
+.player-card:hover::after {
+    opacity: 1;
+}
+
+.player-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.player-nick {
+    color: var(--accent-light);
+    font-family: monospace;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+}
+
+/*=== КАРТЫ (GRID) ===*/
+#maps {
+    padding: 0;
+    max-width: 100%;
+}
+
+#maps h2 {
+    color: var(--text-primary);
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    letter-spacing: -0.5px;
+}
+
+#maps h2::before {
+    display: none;
+}
+
+.maps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.map-card {
+    background-color: var(--bg-card);
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+}
+
+.map-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--accent-orange);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.map-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+}
+
+.map-card span {
+    display: block;
+    padding: 1rem;
+    color: var(--text-primary);
+    font-weight: 600;
+    font-size: 1.2rem;
+    text-align: center;
+    background-color: var(--bg-card);
+}
+
+/* Псевдокласс :nth-child для карт */
+.map-card:nth-child(even) {
+    border-top: 3px solid var(--accent-steel);
+}
+
+/*=== ТРЕНЕРСКИЙ БЛОК ===*/
+.coach-block {
+    background: linear-gradient(135deg, var(--bg-card), var(--bg-elevated));
+    border-radius: var(--border-radius-md);
+    padding: 1.5rem 2rem;
+    margin-top: 1rem;
+    border-left: 4px solid var(--accent-steel);
+    position: relative;
+}
+
+/*=== ФОРМА ПОДПИСКИ ===*/
+.form-container {
+    background: var(--bg-card);
+    border-radius: var(--border-radius-md);
+    padding: 2rem;
+    border: 1px solid var(--border-color);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.form-group {
+    margin-bottom: 1.2rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+input, textarea {
+    width: 100%;
+    padding: 12px 14px;
+    background: var(--bg-dark);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-sm);
+    color: var(--text-primary);
+    font-family: inherit;
+    transition: all var(--transition);
+}
+
+/* Псевдокласс :focus + анимация */
+input:focus, textarea:focus {
+    outline: none;
+    border-color: var(--accent-steel);
+    box-shadow: 0 0 0 2px rgba(122, 139, 155, 0.3);
+    animation: pulseGlow 0.4s ease;
+}
+
+@keyframes pulseGlow {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.01); }
+    100% { transform: scale(1); }
+}
+
+input::placeholder, textarea::placeholder {
+    color: #4a4a55;
+}
+
+/* Валидация форм */
+input:required:valid:not(:placeholder-shown) {
+    border-left: 3px solid var(--success);
+}
+
+input:required:invalid:not(:placeholder-shown) {
+    border-left: 3px solid var(--danger);
+}
+
+button {
+    background: var(--accent-steel);
+    color: var(--bg-dark);
+    border: none;
+    padding: 12px 24px;
+    font-weight: 600;
+    border-radius: 40px;
+    cursor: pointer;
+    transition: all var(--transition);
+    width: 100%;
+    font-size: 1rem;
+}
+
+button:hover {
+    background: var(--accent-light);
+    transform: scale(1.02);
+}
+
+/*=== FOOTER ===*/
+footer {
+    text-align: center;
+    padding: 2rem;
+    border-top: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+}
+
+/*=== АДАПТИВНОСТЬ (2 БРЕЙКПОИНТА) ===*/
+@media (max-width: 850px) {
+    .header-container {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+    
+    .team-grid {
+        grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+        gap: 1rem;
+    }
+    
+    main {
+        padding: 1.5rem;
+    }
+    
+    h2 {
+        font-size: 1.5rem;
+    }
+    
+    .maps-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 550px) {
+    h2::before {
+        display: none;
+    }
+    
+    nav ul {
+        gap: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .player-card::after {
+        display: none;
+    }
+    
+    .coach-block {
+        padding: 1rem;
+    }
+    
+    .maps-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .map-card img {
+        height: 200px;
+    }
+    
+    .form-container {
+        padding: 1.5rem;
+    }
+}
